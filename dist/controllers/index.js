@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.secured = exports.stripePayment = exports.contact = exports.auto_sign_in = exports.refresh_access_token = exports.signin = exports.signup = void 0;
+exports.home = exports.secured = exports.stripePayment = exports.contact = exports.auto_sign_in = exports.refresh_access_token = exports.signin = exports.signup = void 0;
 var authentication_1 = require("./authentication");
 Object.defineProperty(exports, "signup", { enumerable: true, get: function () { return authentication_1.signup; } });
 var authentication_2 = require("./authentication");
@@ -15,4 +15,6 @@ var payment_1 = require("./payment");
 Object.defineProperty(exports, "stripePayment", { enumerable: true, get: function () { return payment_1.stripePayment; } });
 var securedAPI_1 = require("./securedAPI");
 Object.defineProperty(exports, "secured", { enumerable: true, get: function () { return securedAPI_1.secured; } });
+var home_1 = require("./home");
+Object.defineProperty(exports, "home", { enumerable: true, get: function () { return home_1.home; } });
 //# sourceMappingURL=index.js.map
