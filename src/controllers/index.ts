@@ -5,4 +5,4 @@ export { auto_sign_in } from './authentication';
 export { contact } from './contact';
 export { stripePayment } from './payment';
 export { secured } from './securedAPI';
-export { home } from './home';
+export { home } from '../controllers/home/index';
