@@ -8,6 +8,7 @@
     "test": "concurrently \"tsc -w \" \"nodemon -w dist dist/app.js\"",
     "watch": "tsc -w ",
     "dev": "nodemon dist/app.js",
+    "heroku": "ts-node src/app.ts",
     "start": "concurrently \"tsc --watch\" \"nodemon dist/app.js\""
   },
   "keywords": [],
