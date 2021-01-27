@@ -4,12 +4,10 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "devold": "nodemon --exec  ts-node src/app.ts",
-    "test": "concurrently \"tsc -w \" \"nodemon -w dist dist/app.js\"",
-    "watch": "tsc -w ",
-    "dev": "nodemon dist/app.js",
     "heroku-postbuild": "ts-node src/app.ts",
-    "start": "concurrently \"tsc --watch\" \"nodemon dist/app.js\""
+    "dev": "concurrently \"tsc --watch\" \"nodemon dist/app.js\"",
+    "build": "tsc && npm run start",
+    "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "Mehmet Ali Gülay (https://mhmtlgly.com)",
