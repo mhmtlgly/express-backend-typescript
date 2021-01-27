@@ -1,0 +1,1 @@
+export { stripePayment } from './stripe';
