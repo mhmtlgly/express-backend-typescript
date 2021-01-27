@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import { verifyToken } from '../../helpers';
 
 export const validateToken = (req: Request, res: Response, next: NextFunction) => {
   let accessToken = req.headers.authorization?.split(' ').pop();
