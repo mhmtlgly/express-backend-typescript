@@ -5,14 +5,17 @@
   "main": "app.js",
   "scripts": {
     "devold": "nodemon --exec  ts-node src/app.ts",
+    "test": "concurrently \"tsc -w \" \"nodemon -w dist dist/app.js\"",
     "watch": "tsc -w ",
     "dev": "nodemon dist/app.js",
-    "test": "concurrently \"tsc -w \" \"nodemon -w dist dist/app.js\"",
     "start": "concurrently \"tsc --watch\" \"nodemon dist/app.js\""
   },
   "keywords": [],
   "author": "Mehmet Ali Gülay (https://mhmtlgly.com)",
   "license": "MIT",
+  "engines": {
+    "node": "12.18.2"
+  },
   "dependencies": {
     "axios": "^0.21.1",
     "bcrypt": "^5.0.0",
