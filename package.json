@@ -4,9 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "heroku-postbuild": "tsc && npm run start",
-    "dev": "concurrently \"tsc --watch\" \"nodemon dist/app.js\"",
-    "start": "node dist/app.js"
+    "start": "node dist/app.js",
+    "postinstall": "tsc",
+    "dev": "concurrently \"tsc --watch\" \"nodemon dist/app.js\""
   },
   "keywords": [],
   "author": "Mehmet Ali Gülay (https://mhmtlgly.com)",
