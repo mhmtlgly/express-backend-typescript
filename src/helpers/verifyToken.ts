@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-export const verifyJwt = (token: any) => {
+export const verifyToken = (token: any) => {
   try {
     return jwt.verify(token, process.env.JWT_REFRESH_TOKEN!);
   } catch (error) {
