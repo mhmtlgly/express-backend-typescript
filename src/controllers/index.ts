@@ -1,8 +1,6 @@
-export { signup } from './authentication';
-export { signin } from './authentication';
-export { refresh_access_token } from './authentication';
-export { auto_sign_in } from './authentication';
-export { contact } from './contact';
+export { signup, signin, verify, refresh_access_token, auto_sign_in } from './authentication';
 export { stripePayment } from './payment';
 export { secured } from './securedAPI';
 export { home } from './home';
+export { contact } from './contact';
+export { products, deleteProduct, getProduct, updateProduct } from './admin';

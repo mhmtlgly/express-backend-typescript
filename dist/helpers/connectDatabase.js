@@ -9,23 +9,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.connectToDatabase = void 0;
 const mongoose_1 = require("mongoose");
-const connectToDatabase = () => __awaiter(void 0, void 0, void 0, function* () {
+(() => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield mongoose_1.connect(process.env.MONGODB_URI, {
-            // dbName: "mahos_db",
+            dbName: 'mahos_db',
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true,
+            useFindAndModify: false,
         }, () => console.log('Database is connected.'));
     }
     catch (error) {
         console.log('could not connect to Database!');
         console.log(error);
     }
-});
-exports.connectToDatabase = connectToDatabase;
-exports.connectToDatabase();
-exports.default = exports.connectToDatabase;
+}))();
 //# sourceMappingURL=connectDatabase.js.map

@@ -1,5 +1,4 @@
 "use strict";
-//
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -20,8 +19,9 @@ app.use('/api/contact', routes_1.contact);
 app.use('/api/payment', routes_1.stripe);
 app.use('/api/secured', routes_1.secured);
 app.use('/', routes_1.home);
+app.use('/api/crud/admin/products', routes_1.products);
 app.use(github_1.default);
 //- Server -//
 const PORT = process.env.PORT || 5050;
-app.listen(PORT, () => console.log(`app listening on port: ${PORT}...`));
+app.listen(PORT, () => console.log(`app listening on port: ${PORT}.`));
 //# sourceMappingURL=app.js.map

@@ -17,7 +17,6 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const helpers_1 = require("../../helpers");
 const models_1 = require("../../models");
 const refresh_access_token = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(req.cookies);
     const { token } = req.cookies;
     if (!token) {
         return res.status(400).json({
@@ -38,25 +37,27 @@ const refresh_access_token = (req, res) => __awaiter(void 0, void 0, void 0, fun
                 error,
             });
         }
-        const user = yield models_1.User.findOne({ _id: jwtPayload.userId }, (error, data) => {
-            if (error) {
-                console.log(error);
-                return res.status(400).json({
-                    status: 'error',
-                    message: "Couldn't find user.",
-                    error,
-                });
-            }
-            else {
-                console.log(data);
-                return data;
-            }
-        });
-        return res.status(200).json({
-            status: 'success',
-            message: 'Refresh Token is valid.',
-            accessToken: helpers_1.generateAccessToken(user._id),
-        });
+        const user = yield models_1.User.findOneAndUpdate({ _id: jwtPayload.userId }, { $inc: { tokenVersion: 1 } }).catch((err) => console.log(err));
+        if (user.tokenVersion !== jwtPayload.tokenVersion) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'Token Version not correct.',
+            });
+        }
+        if (user) {
+            return res.status(200).json({
+                status: 'success',
+                message: 'Refresh Token is valid.',
+                accessToken: helpers_1.generateAccessToken(user._id, user.tokenVersion),
+                accesTokenVersion: user.tokenVersion,
+            });
+        }
+        else {
+            return res.status(400).json({
+                status: 'error',
+                message: 'User not found.',
+            });
+        }
     }
 });
 exports.refresh_access_token = refresh_access_token;

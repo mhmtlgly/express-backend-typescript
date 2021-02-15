@@ -14,7 +14,9 @@ const secured = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(`VARIABLE FROM LOCALS: ${JSON.stringify(res.locals.token)}`);
     console.log(`VARIABLE FROM LOCALS: ${res.locals.accessToken}`);
     console.log('accessed secured route');
-    return res.status(200).json({ status: 'success', message: 'access granted to protected route' });
+    return res
+        .status(200)
+        .json({ status: 'success', message: 'access granted to protected route' });
 });
 exports.secured = secured;
 //# sourceMappingURL=index.js.map

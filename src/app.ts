@@ -1,12 +1,10 @@
-//
-
 import 'dotenv/config';
 import './helpers/connectDatabase';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 
 import { cors, morgan } from './middleware';
-import { authentication, contact, stripe, secured, home } from './routes';
+import { authentication, stripe, secured, home, contact, products } from './routes';
 import githubroute from './routes/authentication/github';
 
 const app = express();
@@ -22,9 +20,10 @@ app.use('/api/contact', contact);
 app.use('/api/payment', stripe);
 app.use('/api/secured', secured);
 app.use('/', home);
+app.use('/api/crud/admin/products', products);
 app.use(githubroute);
 
 //- Server -//
 
 const PORT = process.env.PORT || 5050;
-app.listen(PORT, () => console.log(`app listening on port: ${PORT}...`));
+app.listen(PORT, () => console.log(`app listening on port: ${PORT}.`));

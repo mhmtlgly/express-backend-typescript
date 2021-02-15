@@ -1,8 +1,7 @@
 ### Refresh Token
-POST http://localhost:5000/refresh-token
-
-
-
+POST http://localhost:5000/api/secured
+content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDBkYWJlMGI3NWQwMzM0M2NlYmJhNWEiLCJpYXQiOjE2MTIyODY5MjIsImV4cCI6MTYxMjI4Njk4Mn0.q4YQsKdMmzzlY4x53WeNCeaVykYP4VwDWVtN2OoKx0A
 
 
 ### Logout

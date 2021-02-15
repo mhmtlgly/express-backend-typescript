@@ -5,7 +5,6 @@ import { generateAccessToken } from '../../helpers';
 import { User } from '../../models';
 
 export const refresh_access_token = async (req: Request, res: Response) => {
-  console.log(req.cookies);
   const { token } = req.cookies;
   if (!token) {
     return res.status(400).json({
@@ -25,24 +24,30 @@ export const refresh_access_token = async (req: Request, res: Response) => {
       });
     }
 
-    const user = await User.findOne({ _id: jwtPayload.userId }, (error: any, data: any) => {
-      if (error) {
-        console.log(error);
-        return res.status(400).json({
-          status: 'error',
-          message: "Couldn't find user.",
-          error,
-        });
-      } else {
-        console.log(data);
-        return data;
-      }
-    });
+    const user = await User.findOneAndUpdate(
+      { _id: jwtPayload.userId },
+      { $inc: { tokenVersion: 1 } },
+    ).catch((err: any) => console.log(err));
 
-    return res.status(200).json({
-      status: 'success',
-      message: 'Refresh Token is valid.',
-      accessToken: generateAccessToken(user._id),
-    });
+    if (user.tokenVersion !== jwtPayload.tokenVersion) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Token Version not correct.',
+      });
+    }
+
+    if (user) {
+      return res.status(200).json({
+        status: 'success',
+        message: 'Refresh Token is valid.',
+        accessToken: generateAccessToken(user._id, user.tokenVersion),
+        accesTokenVersion: user.tokenVersion,
+      });
+    } else {
+      return res.status(400).json({
+        status: 'error',
+        message: 'User not found.',
+      });
+    }
   }
 };

@@ -24,23 +24,27 @@ export const auto_sign_in = async (req: Request, res: Response) => {
       });
     }
 
-    const user = await User.findOne({ _id: jwtPayload.userId }, (error: any, data: any) => {
-      if (error) {
-        console.log(error);
-        return res.status(400).json({
-          status: 'error',
-          message: "Couldn't find user.",
-          error,
-        });
-      } else {
-        console.log(data);
-      }
-    }).select('-password');
+    const user = await User.findOne(
+      { _id: jwtPayload.userId },
+      (error: any, data: any) => {
+        if (error) {
+          console.log(error);
+          return res.status(400).json({
+            status: 'error',
+            message: "Couldn't find user.",
+            error,
+          });
+        } else {
+          console.log(data);
+        }
+      },
+    ).select('-password');
+
+    const { email, role } = user;
 
     return res.status(200).json({
-      status: 'success',
-      message: 'Refresh Token is valid.',
-      user,
+      email,
+      role,
       isAuthenticated: true,
     });
   }

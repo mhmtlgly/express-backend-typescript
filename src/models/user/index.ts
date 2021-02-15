@@ -1,14 +1,17 @@
 import { Schema, model, Document, Model } from 'mongoose';
 
 interface UserInterface extends Document {
+  // _id: String;
   email: string;
   password: string;
   role: string;
-  // id: string;
+  tokenVersion: number;
+  verifiedEmail: boolean;
 }
 
 const UserSchema = new Schema(
   {
+    // _id: String,
     email: {
       type: String,
       required: true,
@@ -22,14 +25,17 @@ const UserSchema = new Schema(
     },
     role: {
       type: String,
-      trim: true,
-      // default: buyer,
     },
-    // id: {
-    //   type: String,
-    // },
+    tokenVersion: {
+      type: Number,
+      default: 0,
+    },
+    verifiedEmail: {
+      type: Boolean,
+      default: false,
+    },
   },
-  { _id: true, timestamps: true, collection: 'users' },
+  { _id: true, timestamps: true },
 );
 
-export const User = model<UserInterface>('User', UserSchema);
+export const User = model<UserInterface>('users', UserSchema);

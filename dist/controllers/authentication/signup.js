@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.signup = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const models_1 = require("../../models");
-// import mongoose, { Types } from 'mongoose';
+const helpers_1 = require("../../helpers");
 const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
     try {
@@ -25,11 +25,16 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             password: hashedPassword,
             role: 'buyer',
         });
-        console.log(`User created ${user}`);
+        const text = 'The Text version';
+        const html = `
+    <h2>Welcome to AMAZNG APP</h2>
+    <p>Your email is: ${email}</p>
+    <a href="http://localhost:8002/account/verify?token=123">verify account</a>
+    `;
+        const mail = helpers_1.sendMail(req, res, text, html);
         res.status(201).json({ user });
     }
     catch (error) {
-        // console.log(JSON.stringify(error));
         console.log(JSON.stringify(error.message));
         res.status(400).send(error);
     }

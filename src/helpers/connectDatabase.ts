@@ -1,15 +1,15 @@
-import { connect } from 'mongoose';
+import mongoose, { connect } from 'mongoose';
 
-export const connectToDatabase = async () => {
+(async () => {
   try {
     await connect(
       process.env.MONGODB_URI!,
       {
-        // dbName: "mahos_db",
+        dbName: 'mahos_db',
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
-        // useFindAndModify: false
+        useFindAndModify: false,
       },
       () => console.log('Database is connected.'),
     );
@@ -17,8 +17,4 @@ export const connectToDatabase = async () => {
     console.log('could not connect to Database!');
     console.log(error);
   }
-};
-
-connectToDatabase();
-
-export default connectToDatabase;
+})();

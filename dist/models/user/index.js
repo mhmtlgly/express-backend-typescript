@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const mongoose_1 = require("mongoose");
 const UserSchema = new mongoose_1.Schema({
+    // _id: String,
     email: {
         type: String,
         required: true,
@@ -16,8 +17,15 @@ const UserSchema = new mongoose_1.Schema({
     },
     role: {
         type: String,
-        trim: true,
     },
-}, { _id: true, timestamps: true, collection: 'users' });
-exports.User = mongoose_1.model('User', UserSchema);
+    tokenVersion: {
+        type: Number,
+        default: 0,
+    },
+    verifiedEmail: {
+        type: Boolean,
+        default: false,
+    },
+}, { _id: true, timestamps: true });
+exports.User = mongoose_1.model('users', UserSchema);
 //# sourceMappingURL=index.js.map

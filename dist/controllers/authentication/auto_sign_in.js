@@ -50,10 +50,10 @@ const auto_sign_in = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                 console.log(data);
             }
         }).select('-password');
+        const { email, role } = user;
         return res.status(200).json({
-            status: 'success',
-            message: 'Refresh Token is valid.',
-            user,
+            email,
+            role,
             isAuthenticated: true,
         });
     }
